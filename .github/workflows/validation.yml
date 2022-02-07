@@ -13,5 +13,6 @@ jobs:
       - run: npm run validate
       - uses: codecov/codecov-action@v2
         with:
-          files: coverage/lcov.info
+          directory: ./coverage
+          files: ./lcov.info
           fail_ci_if_error: true
