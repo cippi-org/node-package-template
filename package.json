@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "husky install",
     "build": "tsc -p tsconfig.json",
-    "onchange:test": "nyc --silent --reporter=lcov ava --watch",
+    "onchange:test": "nyc --silent ava --watch",
     "onchange:build": "tsc -p tsconfig.json -w",
     "fix": "run-s fix:*",
     "fix:format": "prettier \"src/**/*.ts\" --write",
@@ -14,7 +14,7 @@
     "validate": "run-s build validate:*",
     "validate:format": "prettier \"src/**/*.ts\" --list-different",
     "validate:lint": "eslint src --ext .ts",
-    "validate:tests": "nyc --silent ava",
+    "validate:tests": "nyc ava",
     "create-docs": "typedoc src/ --exclude **/*.test.ts --includeVersion --readme README.md --out docs",
     "cz": "cz",
     "prepare-release": "run-s validate standard-version",
