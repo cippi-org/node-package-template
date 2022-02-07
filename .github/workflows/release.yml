@@ -13,7 +13,7 @@ jobs:
           node-version: '14'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@cippi'
-      - run: npm ci
+      - run: npm ci --no-audit
       - run: npm run create-docs
       - name: get-npm-version
         id: package-version

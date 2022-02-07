@@ -9,10 +9,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - run: npm ci
+      - run: npm ci --no-audit
       - run: npm run validate
       - uses: codecov/codecov-action@v2
         with:
-          directory: ./coverage
-          files: ./lcov.info
+          files: coverage/lcov.info
           fail_ci_if_error: true

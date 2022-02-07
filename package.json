@@ -14,7 +14,7 @@
     "validate": "run-s build validate:*",
     "validate:format": "prettier \"src/**/*.ts\" --list-different",
     "validate:lint": "eslint src --ext .ts",
-    "validate:tests": "nyc ava",
+    "validate:tests": "nyc --reporter=lcov ava",
     "create-docs": "typedoc src/ --exclude **/*.test.ts --includeVersion --readme README.md --out docs",
     "cz": "cz",
     "prepare-release": "run-s validate standard-version",
