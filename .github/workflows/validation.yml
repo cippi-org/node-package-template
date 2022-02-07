@@ -1,0 +1,17 @@
+name: validation-workflow
+on: [push]
+jobs:
+  validate:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm ci
+      - run: npm run validate
+      - uses: codecov/codecov-action@v2
+        with:
+          files: coverage/lcov.info
+          fail_ci_if_error: true

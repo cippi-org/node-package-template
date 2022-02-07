@@ -1,0 +1,103 @@
+{
+  "name": "@cippi/node-package-template",
+  "version": "0.0.0",
+  "description": "A starter kit for creating a node package.",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "build": "tsc -p tsconfig.json",
+    "onchange:test": "nyc --silent --reporter=lcov ava --watch",
+    "onchange:build": "tsc -p tsconfig.json -w",
+    "fix": "run-s fix:*",
+    "fix:format": "prettier \"src/**/*.ts\" --write",
+    "fix:lint": "eslint src --ext .ts --fix",
+    "validate": "run-s build validate:*",
+    "validate:format": "prettier \"src/**/*.ts\" --list-different",
+    "validate:lint": "eslint src --ext .ts",
+    "validate:coverage": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
+    "validate:tests": "ava",
+    "create-docs": "typedoc src/ --exclude **/*.test.ts --includeVersion --readme README.md --out docs",
+    "cz": "cz",
+    "prepare-release": "run-s validate standard-version",
+    "commit-all": "git add -A && git commit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cippi-org/node-package-template.git"
+  },
+  "keywords": [
+    "typescript",
+    "template"
+  ],
+  "author": "CIPPI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cippi-org/node-package-template/issues"
+  },
+  "homepage": "https://github.com/cippi-org/node-package-template#readme",
+  "files": [
+    "build",
+    "!**/*.test.*",
+    "!**/*.json",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@ava/typescript": "^3.0.1",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@types/node": "^17.0.15",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "ava": "^4.0.1",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-functional": "^4.2.0",
+    "eslint-plugin-import": "^2.25.4",
+    "husky": "^7.0.4",
+    "npm-run-all": "^4.1.5",
+    "nyc": "^15.1.0",
+    "prettier": "^2.5.1",
+    "standard-version": "^9.3.2",
+    "ts-node": "^10.4.0",
+    "typedoc": "^0.22.11",
+    "typescript": "^4.5.5"
+  },
+  "ava": {
+    "failFast": true,
+    "timeout": "60s",
+    "typescript": {
+      "extensions": [
+        "ts"
+      ],
+      "rewritePaths": {
+        "src/": "build/"
+      },
+      "compile": false
+    },
+    "files": [
+      "**/*.test.*",
+      "!build"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "exclude": [
+      "**/*.test.js"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
+}
