@@ -14,8 +14,7 @@
     "validate": "run-s build validate:*",
     "validate:format": "prettier \"src/**/*.ts\" --list-different",
     "validate:lint": "eslint src --ext .ts",
-    "validate:coverage": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
-    "validate:tests": "ava",
+    "validate:tests": "nyc --silent ava",
     "create-docs": "typedoc src/ --exclude **/*.test.ts --includeVersion --readme README.md --out docs",
     "cz": "cz",
     "prepare-release": "run-s validate standard-version",
@@ -93,7 +92,8 @@
     "extends": "@istanbuljs/nyc-config-typescript",
     "exclude": [
       "**/*.test.js"
-    ]
+    ],
+    "check-coverage": true
   },
   "config": {
     "commitizen": {
