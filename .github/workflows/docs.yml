@@ -1,7 +1,7 @@
-name: docs-workflow
+name: docs
 on: [push]
   push:
-    - 'releases/**'
+    - main
 jobs:
   build:
     concurrency: ci-${{ github.ref }}
@@ -11,8 +11,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@cippi'
       - run: npm ci --no-audit
       - run: npm run create-docs
       - name: get-npm-version
@@ -23,6 +21,3 @@ jobs:
           folder: docs
           branch: gh-pages
           target-folder: ${{ steps.package-version.outputs.current-version }}
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,5 +1,8 @@
-name: validation-workflow
-on: [push]
+name: build
+on:
+  push:
+    paths-ignore:
+      - '*.md'
 jobs:
   validate:
     concurrency: ci-${{ github.ref }}
